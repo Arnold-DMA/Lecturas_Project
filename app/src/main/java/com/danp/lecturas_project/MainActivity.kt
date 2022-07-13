@@ -19,6 +19,7 @@ import com.danp.lecturas_project.navigation.Destinations.*
 import com.danp.lecturas_project.navigation.NavigationHost
 import com.danp.lecturas_project.presentation.components.BottomNavigationBar
 import com.danp.lecturas_project.presentation.components.TopFBar
+import com.google.firebase.ktx.Firebase
 
 
 class MainActivity : ComponentActivity() {

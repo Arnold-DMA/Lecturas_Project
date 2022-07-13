@@ -9,10 +9,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Logout
 import androidx.compose.material.icons.filled.Person
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.*
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.sp
@@ -22,6 +19,7 @@ import com.danp.lecturas_project.datastore.Preferencias
 import com.danp.lecturas_project.navigation.Destinations
 import com.danp.lecturas_project.ui.theme.Purple700
 import com.danp.lecturas_project.ui.theme.Purple500
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.launch
 
 
@@ -34,6 +32,7 @@ fun TopFBar(
     val dataStore = Preferencias(mContext)
     val estadoSesion = dataStore.getEstadoSesion.collectAsState(initial = false).value
     val skipSesion = dataStore.getSkipSesion.collectAsState(initial = false).value
+
     TopAppBar(
         title = { Text(
             text = "Improve  your  Reading",
@@ -41,27 +40,30 @@ fun TopFBar(
 
             ) },
         actions = {
-            IconButton(onClick = {
-                if (skipSesion){
+            if (skipSesion) {
+                IconButton(onClick = {
                     scope.launch {
                         dataStore.saveSkipSesion(false)
                         openLogin.value = !openLogin.value
                     }
                 }
+                ){
+                    Icon(Icons.Default.Person, "Perfil")
+                }
             }
-            ){
-                Icon(Icons.Default.Person, "Perfil")
-            }
-            IconButton(onClick = {
-                if (estadoSesion){
+            if (estadoSesion){
+                IconButton(onClick = {
+                    FirebaseAuth.getInstance().signOut()
                     scope.launch {
                         dataStore.saveEstadoSesion(false)
+                        dataStore.saveEmail("")
+                        dataStore.saveNombre("")
                         openLogin.value = !openLogin.value
                     }
                 }
-            }
-            ){
-                Icon(Icons.Default.Logout, "Salir")
+                ){
+                    Icon(Icons.Default.Logout, "Salir")
+                }
             }
         },
         backgroundColor = Purple700,
