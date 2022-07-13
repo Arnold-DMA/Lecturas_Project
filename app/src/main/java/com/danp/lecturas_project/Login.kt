@@ -27,6 +27,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.*
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
@@ -94,12 +95,13 @@ fun LoginScreen(){
                             style = if (pagerState.currentPage == index) {
                                 TextStyle(
                                     color = Purple700,
-                                    fontSize = 18.sp
+                                    fontSize = 19.sp,
+                                    fontWeight = FontWeight.Black
                                 )
                             } else {
                                 TextStyle(
-                                    color = Purple700,
-                                    fontSize = 16.sp
+                                    color = Color.White,
+                                    fontSize = 15.sp,
                                 )
                             }
                         )
