@@ -25,7 +25,7 @@ fun Home(navController: NavHostController) {
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "Principal",
+            text = "Principal Pantalla",
             style = TextStyle(color = Color.Black, fontSize = 42.sp, fontWeight = FontWeight.Black)
         )
     }
