@@ -5,13 +5,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.danp.lecturas_project.database.LecturasDataBase
 import com.danp.lecturas_project.database.LecturasEntity
 import kotlinx.coroutines.launch
 
-class MainViewModel /*constructor(dbl: LecturasDataBase)*/: ViewModel() {
+class MainViewModel: ViewModel() {
 
-    private val repository = Repository()//(dbl)
+    private val repository = Repository()
 
     var state by mutableStateOf(ScreenState())
 

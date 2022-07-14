@@ -116,13 +116,16 @@ fun botones(eleccion: MutableState<Boolean>, navController: NavHostController) {
 
 @Composable
 fun OpenLectura(eleccion: MutableState<Boolean>, navController: NavHostController) {
-    val dbf = FirebaseFirestore.getInstance()
 
+
+    //Datastore
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val dataStore = Preferencias(context)
     val usuario = dataStore.getNombre.collectAsState(initial = "").value
 
+    //Firebase
+    val dbf = FirebaseFirestore.getInstance()
     val titulo = remember { mutableStateOf("") }
     val texto = remember { mutableStateOf("") }
     val lectura_id = remember { mutableStateOf("") }
@@ -224,7 +227,6 @@ fun OpenLectura(eleccion: MutableState<Boolean>, navController: NavHostControlle
                         )
                     )
                 }
-
                 scope.launch {
                     dbl.lecturaDao().insert(
                         LecturasEntity(id = (cantidad2+1), titulo = titulo.value,
