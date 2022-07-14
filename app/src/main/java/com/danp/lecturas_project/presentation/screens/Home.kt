@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.danp.lecturas_project.R
-
+private val morado = Color(0x800080)
 @Composable
 fun Home(navController: NavHostController) {
     Column( modifier = Modifier
@@ -55,7 +55,7 @@ fun Home(navController: NavHostController) {
         Text(
             text = "Por ello te presentamos esta aplicacion que te ayudara a mejorar tu niveles de lectura y concetracion.",
 
-            style = TextStyle(color = Color.LightGray, fontSize = 12.sp, fontWeight = FontWeight.Black , fontFamily = FontFamily.Serif, textAlign = TextAlign.Center)
+            style = TextStyle(color = Color.DarkGray, fontSize = 12.sp, fontWeight = FontWeight.Black , fontFamily = FontFamily.Serif, textAlign = TextAlign.Center)
         )
 
 
