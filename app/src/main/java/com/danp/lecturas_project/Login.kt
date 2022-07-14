@@ -44,6 +44,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
+import java.time.LocalDateTime
 import kotlin.coroutines.coroutineContext
 
 
@@ -51,7 +52,7 @@ import kotlin.coroutines.coroutineContext
 @Preview
 @Composable
 fun LoginScreen(){
-
+    val datetime = LocalDateTime.now()
 
     val tabItems = listOf("Iniciar Sesión", "Crear una cuenta")
     val pagerState = rememberPagerState()
@@ -168,6 +169,7 @@ fun SignUpForm() {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val dataStore = Preferencias(context)
+    val ass = LocalDateTime.now()
 
     TextFieldWithIcons(
         name = "Nombres",
