@@ -23,8 +23,11 @@ import com.danp.lecturas_project.ui.theme.Purple200
 import com.danp.lecturas_project.ui.theme.Purple500
 import com.danp.lecturas_project.ui.theme.Purple700
 import com.danp.lecturas_project.ui.theme.cyan
+
+
 @Composable
 fun Home(navController: NavHostController) {
+
     Column( modifier = Modifier
         .padding(12.dp)
         .fillMaxSize()) {

@@ -52,7 +52,7 @@ import kotlin.coroutines.coroutineContext
 @Preview
 @Composable
 fun LoginScreen(){
-    val datetime = LocalDateTime.now()
+
 
     val tabItems = listOf("Iniciar Sesión", "Crear una cuenta")
     val pagerState = rememberPagerState()

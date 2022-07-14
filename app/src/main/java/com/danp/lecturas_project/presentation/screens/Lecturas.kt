@@ -59,13 +59,14 @@ fun Lecturas(navController: NavHostController) {
 @SuppressLint("CoroutineCreationDuringComposition")
 @Composable
 fun botones(eleccion: MutableState<Boolean>, navController: NavHostController) {
-
+    val dbf = FirebaseFirestore.getInstance()
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val dataStore = Preferencias(context)
     val usuario = dataStore.getNombre.collectAsState(initial = "").value
     val titulo = remember { mutableStateOf("") }
     val texto = remember { mutableStateOf("") }
+
 
     val dbl = Room.databaseBuilder(
         LocalContext.current,
@@ -110,18 +111,7 @@ fun botones(eleccion: MutableState<Boolean>, navController: NavHostController) {
         Text(text = "Iniciar una nueva lectura al azar.", Modifier.padding(start = 10.dp))
     }
 
-    Button(onClick = {
-    },
-        elevation =  ButtonDefaults.elevation(
-            defaultElevation = 10.dp,
-            pressedElevation = 15.dp,
-            disabledElevation = 0.dp
-        ),
-        border = BorderStroke(4.dp, Purple700),
-        colors = ButtonDefaults.outlinedButtonColors(contentColor = Color.Black, backgroundColor = Purple500)
-    ) {
-        Text(text = "Guardar.", Modifier.padding(start = 10.dp))
-    }
+
 }
 
 @Composable
@@ -216,29 +206,44 @@ fun OpenLectura(eleccion: MutableState<Boolean>, navController: NavHostControlle
             for(punto in puntaje) {
                 nota += punto
             }
-            Log.d("Otros", "Nota: ${nota}")
+            //Log.d("Otros", "Nota: ${nota}")
 
-            dbf.collection("puntaje").document().set(
-                hashMapOf(
-                    "id_lectura" to lectura_id.value,
-                    "puntaje" to nota,
-                    "usuario" to usuario
-                )
-            )
+            FirebaseFirestore.getInstance().collection("puntaje").get()
+                .addOnSuccessListener { puntajes ->
+                    var cantidad2 = puntajes.size()
+                scope.launch {
+                    dbf.collection("puntaje").document().set(
+                        hashMapOf(
+                            "id" to (cantidad2+1),
+                            "titulo" to titulo.value,
+                            "texto" to texto.value,
+                            "id_lectura" to lectura_id.value,
+                            "puntaje" to nota,
+                            "usuario" to usuario,
+                            "orden" to dbl.lecturaDao().getOrden(usuario)+1
+                        )
+                    )
+                }
 
-            scope.launch {
-                dbl.lecturaDao().insert(
-                    LecturasEntity(id = dbl.lecturaDao().getCantidad() + 1, titulo = titulo.value,
-                    texto = texto.value, puntaje = nota.toFloat(), usuario,
-                    orden = dbl.lecturaDao().getOrden(usuario)+1)
-                )
+                scope.launch {
+                    dbl.lecturaDao().insert(
+                        LecturasEntity(id = (cantidad2+1), titulo = titulo.value,
+                            texto = texto.value, puntaje = nota, usuario = usuario,
+                            orden = dbl.lecturaDao().getOrden(usuario)+1, id_lectura = lectura_id.value)
+                    )
+                }
+
+
             }
+            navController.navigate("Ranking")
+
+
 
         }) {
             Text(text = "Calificar")
         }
     }
-    Log.d("Otros", puntaje[0].toString())
+    //Log.d("Otros", puntaje[0].toString())
 
 }
 

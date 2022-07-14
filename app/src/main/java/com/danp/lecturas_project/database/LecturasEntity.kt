@@ -9,7 +9,8 @@ data class LecturasEntity(
     @PrimaryKey val id: Int,
     @ColumnInfo(name = "titulo") val titulo: String,
     @ColumnInfo(name = "texto") val texto: String,
-    @ColumnInfo(name = "puntaje") val puntaje: Float,
+    @ColumnInfo(name = "puntaje") val puntaje: Int,
     @ColumnInfo(name = "usuario") val usuario: String,
-    @ColumnInfo(name = "orden") val orden: Int
+    @ColumnInfo(name = "orden") val orden: Int,
+    @ColumnInfo(name = "id_lectura") val id_lectura: String
 )
