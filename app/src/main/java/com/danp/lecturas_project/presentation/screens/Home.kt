@@ -44,7 +44,7 @@ fun Home(navController: NavHostController) {
         }
 
         Text(
-            text = "”Los niveles de aprendizaje nunca han sido muy altos en Perú en comparación con otros países de la región, pero hay un decrecimiento importante respecto a cómo estábamos hace dos años”",
+            text = "”Los niveles de lectura nunca han sido muy altos en Perú en comparación con otros países de la región, pero hay un decrecimiento importante respecto a cómo estábamos hace dos años”",
 
             style = TextStyle(color = Color.Black, fontSize = 12.sp, fontWeight = FontWeight.Black , fontFamily = FontFamily.Serif, textAlign = TextAlign.Center)
         )
