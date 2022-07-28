@@ -202,7 +202,7 @@ fun OpenLectura(eleccion: MutableState<Boolean>, navController: NavHostControlle
         for (pregunta in preguntas) {
             //Log.d("Pregunta", pregunta.data?.get("alternativaA").toString())
             definir(pregunta, esCorrecto = { puntaje[pregunta.numero - 1] = it })
-            //definir(pregunta, esCorrecto = { puntaje[pregunta.data?.get("numero").toString().toInt()] = it} )
+
         }
         Button(onClick = {
             var nota = 0
