@@ -24,9 +24,7 @@ fun NavigationHost(
 
         composable(Ranking.route) {
             Ranking(navController
-            ) { /*newText ->*/
-                navController.navigate(Home.route)
-            }
+            )
         }
 
         composable(Perfil.route) {

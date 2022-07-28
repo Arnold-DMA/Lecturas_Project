@@ -12,11 +12,12 @@ interface LecturasDao {
     @Query("SELECT * FROM LecturasEntity")
     suspend fun getAll(): List<LecturasEntity>
 
+    @Query("SELECT * FROM LecturasEntity ORDER BY puntaje DESC")
+    suspend fun getPuntajes(): List<LecturasEntity>
+
     @Query("SELECT * FROM LecturasEntity WHERE usuario = :user")
     suspend fun getByUser(user: String): List<LecturasEntity>
 
-    /*@Query("SELECT * FROM LecturasEntity WHERE usuario = :user ORDER BY tiempo DESC LIMIT 1")
-    fun getUltimo(user: String): LecturasEntity*/
     @Query("SELECT * FROM LecturasEntity WHERE usuario = :user ORDER BY orden DESC LIMIT 1")
     suspend fun getUltimo(user: String): LecturasEntity
 
@@ -25,6 +26,9 @@ interface LecturasDao {
 
     @Query("SELECT COUNT(*) FROM LecturasEntity WHERE usuario = :user")
     suspend fun getOrden(user: String): Int
+
+    @Query("DELETE FROM LecturasEntity")
+    suspend fun deleteAll()
 
     @Insert
     suspend fun insert(lectura: LecturasEntity)
