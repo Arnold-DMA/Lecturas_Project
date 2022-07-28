@@ -169,7 +169,7 @@ fun SignUpForm() {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
     val dataStore = Preferencias(context)
-    val ass = LocalDateTime.now()
+
 
     TextFieldWithIcons(
         name = "Nombres",

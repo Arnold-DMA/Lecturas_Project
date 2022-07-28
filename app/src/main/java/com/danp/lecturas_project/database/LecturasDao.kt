@@ -18,8 +18,6 @@ interface LecturasDao {
     @Query("SELECT * FROM LecturasEntity WHERE usuario = :user")
     suspend fun getByUser(user: String): List<LecturasEntity>
 
-    /*@Query("SELECT * FROM LecturasEntity WHERE usuario = :user ORDER BY tiempo DESC LIMIT 1")
-    fun getUltimo(user: String): LecturasEntity*/
     @Query("SELECT * FROM LecturasEntity WHERE usuario = :user ORDER BY orden DESC LIMIT 1")
     suspend fun getUltimo(user: String): LecturasEntity
 
