@@ -13,6 +13,7 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.result.launch
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -58,13 +59,21 @@ fun Perfil(navController: NavHostController) {
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp)
-            .verticalScroll(rememberScrollState()),
+            .padding(16.dp),
+            //.verticalScroll(rememberScrollState()),
         verticalArrangement = Arrangement.SpaceAround,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        video(context)
-        mayorCalidad(context)
+        Row(
+            //modifier = Modifier.horizontalScroll(rememberScrollState())
+        ) {
+            Column() {
+                video(context)
+            }
+            Column() {
+                mayorCalidad(context)
+            }
+        }
 
         Button(onClick = {
             val toConvert = imagenBitmap
@@ -91,6 +100,7 @@ fun Perfil(navController: NavHostController) {
         }
         TomarImagen(onImageCapture = { imagenBitmap = it })
 
+
     }
 }
 
@@ -106,7 +116,7 @@ fun video(context: Context) {
     videoUri = FileProvider.getUriForFile(
         context,
         context.packageName + ".provider",
-        File(context.filesDir, "picFromCamera")
+        File(context.filesDir, "videoFromCamera")
     )
     val result = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.CaptureVideo()
@@ -135,7 +145,7 @@ fun video(context: Context) {
             PlayerView(context).apply {
                 player = exoPlayer
             }
-        })
+        }, modifier = Modifier.size(200.dp))
     }
 }
 
@@ -178,7 +188,7 @@ fun mayorCalidad(context: Context) {
                 Image(
                     bitmap = btm.asImageBitmap(),
                     contentDescription = null,
-                    modifier = Modifier.size(400.dp)
+                    modifier = Modifier.size(200.dp)
                 )
             }
         }
