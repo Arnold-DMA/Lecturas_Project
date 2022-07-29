@@ -83,6 +83,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.firebase:firebase-firestore-ktx'
+    implementation 'com.google.firebase:firebase-storage-ktx'
 
     //Room
     implementation "androidx.room:room-ktx:2.4.0"
@@ -105,4 +106,7 @@ dependencies {
     testImplementation "io.insert-koin:koin-test:$koin_version"
     // Jetpack Compose
     implementation "io.insert-koin:koin-androidx-compose:$koin_version"
+
+    //EXO player
+    implementation("com.google.android.exoplayer:exoplayer:2.18.1")
 }
