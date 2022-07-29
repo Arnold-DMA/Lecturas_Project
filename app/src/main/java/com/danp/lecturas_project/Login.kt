@@ -42,6 +42,7 @@ import com.google.accompanist.pager.rememberPagerState
 import com.google.accompanist.pager.pagerTabIndicatorOffset
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.launch
 import java.time.LocalDateTime
@@ -225,6 +226,14 @@ fun SignUpForm() {
                             dataStore.saveNombre(username?:"")
                             dataStore.saveEmail(email?:"")
                         }
+                        FirebaseFirestore.getInstance().collection("usuarios").document(email?:"").set(
+                            hashMapOf(
+                                "nombre" to nombres,
+                                "apellidos" to apellidos,
+                                "email" to email,
+                                "username" to username
+                            )
+                        )
                         context.startActivity(Intent(context, MainActivity::class.java))
                     } else {
                         showAlert(context)
